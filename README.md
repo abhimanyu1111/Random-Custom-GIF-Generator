@@ -2,6 +2,10 @@
 
 A simple React project built to practice and test my understanding of React concepts, API integration, and custom hooks.
 
+## Live Demo
+
+[Custom GIF Generator](https://customgifgenerator.vercel.app)
+
 #Features
 Fetches random GIFs using the GIPHY API
 Generate a new GIF with a button click
