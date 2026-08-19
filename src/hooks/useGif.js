@@ -1,31 +1,38 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import React from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
-
-const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
 
 const useGif = (tag) => {
   const [gif, setGif] = useState("");
   const [spinner, setSpinner] = useState(false);
 
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     setSpinner(true);
 
-    const { data } = await axios.get(tag ? `${url}&tag=${tag}` : url);
+    try {
+      const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
 
-    const imageSource = data.data.images.downsized_large.url;
-    setGif(imageSource);
+      const { data } = await axios.get(
+        tag ? `${url}&tag=${encodeURIComponent(tag)}` : url,
+      );
 
-    setSpinner(false);
-  }
+      console.log("API response:", data);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+      const imageSource = data.data.images.downsized_large.url;
 
-  return {gif, fetchData, spinner }
+      console.log("GIF URL:", imageSource);
+
+      setGif(imageSource);
+    } catch (error) {
+      console.log("GIF error:", error.response?.data || error);
+    } finally {
+      setSpinner(false);
+    }
+  }, [tag]);
+
+
+  return { gif, fetchData, spinner };
 };
 
 export default useGif;
