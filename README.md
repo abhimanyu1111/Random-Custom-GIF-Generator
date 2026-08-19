@@ -1,15 +1,16 @@
-Random GIF Generator
+#Random GIF Generator
 
 A simple React project built to practice and test my understanding of React concepts, API integration, and custom hooks.
 
-Features
+#Features
 Fetches random GIFs using the GIPHY API
 Generate a new GIF with a button click
 Search/fetch GIFs based on tags
 Loading spinner while fetching data
 Uses a custom useGif hook
 Uses Axios for API requests
-Tech Stack
+
+#Tech Stack
 React.js
 Axios
 Tailwind CSS
